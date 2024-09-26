@@ -11,6 +11,35 @@ Slidev addon for draggable graphs
 > [!WARNING]
 > This is work in progress.
 
+## Usage
+
+```bash
+pnpm add -D slidev-addon-graph
+```
+
+In the frontmatter of your `slides.md`:
+
+```md
+---
+addons:
+  - slidev-addon-graph
+---
+```
+
+In your slides:
+
+```md
+<SlidevGraph
+  id="graph1"
+  :items="[
+    { name: 'foo', color: '#155' },
+    { name: 'bar', color: '#551', from: 'foo' },
+  ]"
+/>
+```
+
+`id` is required and should be unique for each graph. When the graph is rendered, you can double click the graph to make it draggable, new positions of the nodes will be saved under `.slidev/graph/${id}.json` that you should commit to your source control.
+
 ## Sponsors
 
 <p align="center">
