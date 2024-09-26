@@ -20,6 +20,10 @@ export default defineConfig({
                 join(root, `.slidev/graph/${payload.data.id}.json`),
                 `${JSON.stringify(payload.data, null, 2)}\n`,
               )
+              // Invalidate the module to trigger a reload
+              const mod = server.moduleGraph.getModuleById('/@slidev-graph-pos')
+              if (mod)
+                server.moduleGraph.invalidateModule(mod)
             }
           })
         })
