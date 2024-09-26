@@ -17,8 +17,10 @@
     "slidev",
     "slidev-addon"
   ],
+  "main": "index.ts",
   "files": [
     "components",
+    "index.ts",
     "vite.config.ts"
   ],
   "scripts": {

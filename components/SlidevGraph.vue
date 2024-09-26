@@ -25,28 +25,9 @@ const props = withDefaults(
     focusScale: 1.5,
   },
 )
+
 const { isDark } = useDarkMode()
 const { $clicks, $scale } = useSlideContext()
-
-interface DataItem {
-  name: string
-  display?: string
-  color?: string
-  to?: string[]
-  from?: string[]
-  dashed?: boolean
-  faded?: boolean
-  animateStop?: boolean
-  link?: string
-  x?: number
-  y?: number
-}
-
-interface SavedPosition {
-  pos: Record<string, { x: number, y: number }>
-  view: { x: number, y: number }
-  scale: number
-}
 
 const container = ref<HTMLDivElement>()
 
