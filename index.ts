@@ -4,6 +4,7 @@ export interface DataItem {
   color?: string
   to?: string[]
   from?: string[]
+  related?: string[]
   dashed?: boolean
   faded?: boolean
   animateStop?: boolean

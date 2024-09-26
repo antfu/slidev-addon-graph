@@ -81,7 +81,7 @@ function toEdges(project: DataItem) {
 
   return [
     ...(project.from || []).map(from => ({
-      id: `${project.name}|${from}`,
+      id: `${project.name}|from|${from}`,
       from,
       to: project.name,
       color: chroma.oklch(luminance.value, c, h).mix(backgroundColor.value, 0.8).hex(),
@@ -92,9 +92,21 @@ function toEdges(project: DataItem) {
         },
       },
     })),
-    ...(project.to || []).map(dep => ({
-      id: `${project.name}|${dep}`,
-      from: dep,
+    ...(project.to || []).map(to => ({
+      id: `${project.name}|to|${to}`,
+      from: project.name,
+      to,
+      color: chroma.oklch(luminance.value, c, h).mix(backgroundColor.value, 0.8).hex(),
+      arrows: {
+        to: {
+          enabled: true,
+          type: 'arrow',
+        },
+      },
+    })),
+    ...(project.related || []).map(re => ({
+      id: `${project.name}|related|${re}`,
+      from: re,
       to: project.name,
       color: chroma.oklch(luminance.value, c, h).mix(backgroundColor.value, 0.95).hex(),
       dashes: [3, 3],
@@ -330,7 +342,7 @@ onMounted(() => {
 
 <style>
 .slidev-graph {
-  --uno: border border-transparent h-100;
+  --uno: border border-transparent min-h-20;
 }
 .slidev-graph div,
 .slidev-graph button {
