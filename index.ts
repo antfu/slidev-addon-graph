@@ -1,4 +1,7 @@
-export interface DataItem {
+/// <reference types="vite/client" />
+import type { NodeOptions } from 'vis-network'
+
+export interface DataItem extends NodeOptions {
   name: string
   display?: string
   color?: string
@@ -7,7 +10,7 @@ export interface DataItem {
   related?: string[]
   dashed?: boolean
   faded?: boolean
-  animateStop?: boolean
+  clicks?: number | false
   link?: string
   x?: number
   y?: number

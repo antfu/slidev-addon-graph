@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DataItem, SavedPositions } from '..'
 import { useDarkMode, useSlideContext } from '@slidev/client'
 import { onClickOutside } from '@vueuse/core'
 import chroma from 'chroma-js'
@@ -33,7 +34,7 @@ const container = ref<HTMLDivElement>()
 
 const isEditing = ref(false)
 
-const saved = computed<SavedPosition>(() => ALL_POS[props.id] || {})
+const saved = computed<SavedPositions>(() => ALL_POS[props.id] || {})
 const backgroundColor = computed(() => props.backgroundColor || (isDark.value ? '#050505' : '#ffff'))
 const luminance = computed(() => isDark.value ? 0.7 : 0.6)
 
@@ -121,7 +122,7 @@ const clicks = computed(() => {
   return Math.max(0, $clicks.value - props.clicks)
 })
 
-const animationStops = computed(() => props.items.filter(p => p.animateStop !== false))
+const animationStops = computed(() => props.items.filter(p => p.clicks !== false))
 
 defineExpose({
   count: computed(() => props.items.length),
@@ -134,11 +135,19 @@ function getCurrentItems() {
   const list: DataItem[] = []
   let count = 0
   for (const item of props.items) {
-    if (item.animateStop !== false)
+    if (item.clicks === false) {
+      list.push(item)
+    }
+    else if (item.clicks == null) {
       count += 1
-    if (count > +$clicks.value)
-      break
-    list.push(item)
+      if (count <= clicks.value)
+        list.push(item)
+    }
+    else {
+      count = Math.max(count, item.clicks)
+      if (item.clicks <= clicks.value)
+        list.push(item)
+    }
   }
   return list
 }
@@ -214,7 +223,7 @@ onMounted(() => {
 
   function save() {
     if (isEditing.value) {
-      import.meta.hot.send('slidev-graph-pos', {
+      import.meta.hot?.send('slidev-graph-pos', {
         id: props.id,
         pos: Object.assign({}, saved.value.pos, network.getPositions()),
         view: network.getViewPosition(),
