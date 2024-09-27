@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DataItem, SavedPositions } from '..'
-import { useDarkMode, useSlideContext } from '@slidev/client'
+import { onSlideEnter, useDarkMode, useSlideContext } from '@slidev/client'
 import { onClickOutside } from '@vueuse/core'
 import chroma from 'chroma-js'
 import { DataSet } from 'vis-data'
@@ -161,7 +161,7 @@ onClickOutside(container, () => {
   isEditing.value = false
 })
 
-onMounted(() => {
+function start() {
   // Apply the position to the items
   props.items.forEach((p) => {
     if (saved.value.pos?.[p.name])
@@ -263,14 +263,6 @@ onMounted(() => {
       container.value.style.cursor = 'default'
   })
 
-  if (saved.value.view) {
-    network.moveTo({
-      animation: false,
-      position: saved.value.view,
-      scale: saved.value.scale,
-    })
-  }
-
   watchEffect(() => {
     network.setOptions({
       interaction: {
@@ -280,6 +272,26 @@ onMounted(() => {
         hover: true,
       },
     })
+  })
+
+  function update() {
+    network.redraw()
+    if (saved.value.view) {
+      network.moveTo({
+        animation: false,
+        position: saved.value.view,
+        scale: saved.value.scale,
+      })
+    }
+  }
+
+  update()
+
+  onSlideEnter(() => {
+    update()
+    setTimeout(() => {
+      update()
+    }, 100)
   })
 
   let initiated = 0
@@ -337,6 +349,10 @@ onMounted(() => {
     }
     initiated += 1
   })
+}
+
+onMounted(() => {
+  start()
 })
 </script>
 
