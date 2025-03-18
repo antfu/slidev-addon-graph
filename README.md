@@ -33,7 +33,7 @@ In your slides:
   id="graph1"
   :items="[
     { name: 'foo', color: '#155' },
-    { name: 'bar', color: '#551', from: 'foo' },
+    { name: 'bar', color: '#551', from: ['foo'] },
   ]"
 />
 ```
