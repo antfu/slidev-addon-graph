@@ -2,7 +2,7 @@
   "name": "slidev-addon-graph",
   "type": "module",
   "version": "0.1.0",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@10.11.0",
   "description": "Slidev addon for draggable graphs",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -35,29 +35,29 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@vueuse/core": "^12.0.0",
+    "@vueuse/core": "^13.2.0",
     "chroma-js": "^3.1.2",
     "vis-data": "^7.1.9",
-    "vis-network": "^9.1.9"
+    "vis-network": "^9.1.10"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.12.0",
-    "@antfu/ni": "^0.23.1",
-    "@antfu/utils": "^0.7.10",
-    "@slidev/client": "^0.50.0-beta.13",
-    "@types/chroma-js": "^2.4.5",
-    "@types/node": "^22.10.2",
-    "bumpp": "^9.9.1",
-    "eslint": "^9.17.0",
+    "@antfu/eslint-config": "^4.13.1",
+    "@antfu/ni": "^24.4.0",
+    "@antfu/utils": "^9.2.0",
+    "@slidev/client": "^51.7.0",
+    "@types/chroma-js": "^3.1.1",
+    "@types/node": "^22.15.18",
+    "bumpp": "^10.1.1",
+    "eslint": "^9.27.0",
     "esno": "^4.8.0",
-    "lint-staged": "^15.2.11",
-    "pnpm": "^9.15.0",
-    "simple-git-hooks": "^2.11.1",
-    "typescript": "^5.7.2",
-    "unbuild": "^3.0.1",
-    "vite": "^6.0.3",
-    "vitest": "^2.1.8",
-    "vue": "^3.5.13"
+    "lint-staged": "^16.0.0",
+    "pnpm": "^10.11.0",
+    "simple-git-hooks": "^2.13.0",
+    "typescript": "^5.8.3",
+    "unbuild": "^3.5.0",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.3",
+    "vue": "^3.5.14"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
